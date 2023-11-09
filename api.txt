@@ -1,0 +1,363 @@
+openapi: 3.0.3
+info:
+  title: Получение информации о клиентах
+  version: 0.0.1
+servers:
+  - url: http://localhost:8080/api/v1
+paths:
+  /clients:
+    get:
+      summary: Метод получения списка клиентов
+      tags: 
+        - Clients
+      operationId: getAllClients
+      responses:
+        "200":
+          description: Успешный ответ со спиcком клиентов
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Clients"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления нового клиента в список
+      tags: 
+        - Clients
+      operationId: createClient
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Client" 
+      responses:
+        "200":
+          description: Успешный ответ добавления нового клиента
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  
+    
+  /clients/{idClient}:
+    get:
+      summary: Метод получения клиента по id
+      tags:
+        - Clients
+      operationId: getClientId
+      parameters:
+        - name: idClient
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Усшный ответ получения клиента по id
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Client"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"     
+    
+    put:
+      tags:
+        - Clients
+      summary: Метод обнавления клиента по id
+      operationId: updateClient
+      parameters:
+        - name: idClient
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      requestBody:
+        description: Обновите существующего клиента по id
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Client'
+          
+        required: true
+      responses:
+        '200':
+          description: Успешное обновление клиента
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Client'          
+            
+        '400':
+          description: Несуществующий id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+        '500':
+          description: Работаем над устронением данной проблеммы
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    
+    
+    delete:
+      summary: Удаление клиента по id
+      tags:
+        - Clients
+      operationId: deleteClientById
+      parameters:
+        - name: idClient
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешное удаление клиента по id
+          content:
+            adplication/json: {}
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error" 
+
+
+
+  /clouds:
+    get:
+      summary: Метод получения списка облаков
+      tags: 
+        - Clouds
+      operationId: getAllClouds
+      responses:
+        "200":
+          description: Успешный ответ со спиcком облаков
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Clouds"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    post:
+      summary: Метод добавления нового облака в список
+      tags: 
+        - Clouds
+      operationId: createCloud
+      requestBody:
+        required: true
+        content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud" 
+      responses:
+        "200":
+          description: Успешный ответ добавления нового облака
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+  
+    
+  /сlouds/{idClient}:
+    get:
+      summary: Метод получения облака по id клиента
+      tags:
+        - Clouds
+      operationId: getCloudId
+      parameters:
+        - name: idClient
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Усшный ответ получения облака по id клиента
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Cloud"
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"     
+    
+    put:
+      tags:
+        - Clouds
+      summary: Метод обнавления облака по id клиента
+      operationId: updateCloud
+      parameters:
+        - name: idClient
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      requestBody:
+        description: Обновите существующее облако по id клиента
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/Cloud'
+          
+        required: true
+      responses:
+        '200':
+          description: Успешное обновление облака
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Cloud'          
+            
+        '400':
+          description: Несуществующий id
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+        '500':
+          description: Работаем над устронением данной проблеммы
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/Error' 
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+    
+    
+    delete:
+      summary: Удаление облака по id клиента
+      tags:
+        - Clouds
+      operationId: deleteCloudById
+      parameters:
+        - name: idClient
+          in: path
+          required: true
+          description: id Client
+          schema:
+            type: string
+      responses:
+        "200":
+          description: Успешное удаление облака по id клиента
+          content:
+            adplication/json: {}
+        "default":
+          description: Всё остальное
+          content:
+            adplication/json:
+              schema:
+                $ref: "#/components/schemas/Error"
+components:
+  schemas:
+    Client:
+      type: object
+      required:
+        - idClient
+        - name
+      properties:
+        idClient:
+          type: integer 
+          example: 1
+          description: Id клиента
+        name:
+          type: string
+          example: Кирилл
+          description: Имя клиента
+    Clients:
+      type: array
+      items:
+        $ref: "#/components/schemas/Client"
+    Error:
+      type: object
+      required:
+        - codeError
+        - messageError
+      properties:
+        codeError:
+          type: string
+          example: 123f456
+          description: Код ошибки
+        messageError:
+          type: string
+          example: error
+          description: Сообщение ошибки
+    Cloud:
+      type: object
+      required:
+        - OS
+        - RAM
+        - CPU
+        - SSD
+        - idClient
+      properties:
+        OS:
+          type: string
+          enum:
+            - Windows
+            - Linux
+        RAM:
+          type: integer
+          example: 256
+          description: Количество оперативной памяти
+        CPU:
+          type: integer
+          example: 8
+          description: Количество ядер процессора 
+        SSD:
+          type: integer
+          example: 1024
+          description: Количетсво ssd памяти
+        idClient:
+          type: integer
+          example: 1
+    Clouds:
+      type: array
+      items:
+        $ref: "#/components/schemas/Cloud"
